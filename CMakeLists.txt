@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.24)
 project(LSM_Tree_KV_Store DESCRIPTION "An LSM-tree storage engine, built using Cpp" LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
