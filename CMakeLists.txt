@@ -3,6 +3,7 @@ project(LSM_Tree_KV_Store DESCRIPTION "An LSM-tree storage engine, built using C
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_compile_options(
   $<$<CONFIG:Debug>:-fsanitize=address,undefined>
@@ -23,13 +24,12 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_library(Engine STATIC src/engine.cpp)
-target_include_directories(Engine PUBLIC include)
-add_executable(CLIExec apps/main.cpp)
-target_link_libraries(CLIExec PRIVATE Engine)
-add_executable(TestEngine tests/engine_test.cpp)
-target_link_libraries(TestEngine PRIVATE Engine GTest::gtest_main)
-
+add_library(lsm STATIC src/engine.cpp)
+target_include_directories(lsm PUBLIC include)
+add_executable(lsm_cli apps/main.cpp)
+target_link_libraries(lsm_cli PRIVATE lsm)
+add_executable(lsm_tests tests/engine_test.cpp)
+target_link_libraries(lsm_tests PRIVATE lsm GTest::gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(TestEngine)
+gtest_discover_tests(lsm_tests)
