@@ -24,11 +24,11 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_library(lsm STATIC src/engine.cpp)
+add_library(lsm STATIC src/db.cpp)
 target_include_directories(lsm PUBLIC include)
 add_executable(lsm_cli apps/main.cpp)
 target_link_libraries(lsm_cli PRIVATE lsm)
-add_executable(lsm_tests tests/engine_test.cpp)
+add_executable(lsm_tests tests/db_test.cpp)
 target_link_libraries(lsm_tests PRIVATE lsm GTest::gtest_main)
 
 include(GoogleTest)

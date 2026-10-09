@@ -16,7 +16,7 @@ TEST(DBTest, OverwriteReturnsNewestValue) {
 
 TEST(DBTest, GetOnDeletedKeyReturnsEmpty) {
     // This test tests if a deleted key returns empty
-    DB test_db;
+    DB test_db{};
 
     test_db.put("test_key", "test_val_1");
     test_db.del("test_key");
@@ -27,7 +27,7 @@ TEST(DBTest, GetOnDeletedKeyReturnsEmpty) {
 
 TEST(DBTest, GetOnMissingKeyReturnsEmpty) {
     // This test tests if get on a non-existing key returns empty
-    DB test_db;
+    DB test_db{};
 
     auto result = test_db.get("test_key");
 
@@ -36,7 +36,7 @@ TEST(DBTest, GetOnMissingKeyReturnsEmpty) {
 
 TEST(DBTest, DeleteOnMissingKeyIsSafeAndReadsEmpty) {
     // This test tests if deleting a non-existing key and retrieving it returns empty
-    DB test_db;
+    DB test_db{};
 
     test_db.del("test_key");
     auto result = test_db.get("test_key");
@@ -46,7 +46,7 @@ TEST(DBTest, DeleteOnMissingKeyIsSafeAndReadsEmpty) {
 
 TEST(DBTest, KeysIterateInSortedOrder) {
     // This test tests if the iterator returns a sorted vector
-    DB test_db;
+    DB test_db{};
     std::vector<DB::KeyInfo> key_vector;
     std::vector<DB::KeyInfo> sorted_key_vector = {
         {"test_key_1", false},
